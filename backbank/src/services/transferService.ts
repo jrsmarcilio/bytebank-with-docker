@@ -22,6 +22,13 @@ class TransferService {
     if (!transfers) throw new Error("No transfer.");
     return transfers;
   }
+
+  async getById(id: number) {
+    const transferRepository = getCustomRepository(TransferRepository);
+    const transfer = await transferRepository.findOne(id);
+    if (!transfer) throw new Error("No transfer.");
+    return transfer;
+  }
 }
 
 export { TransferService };

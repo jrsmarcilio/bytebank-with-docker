@@ -1,6 +1,7 @@
 <header>
   <h5>Bytebank</h5>
   <section class="btn-menu">
-    <a *ngFor="let item of menus" [routerLink]="item.url">{{item.title}}</a>
+    <button nbButton shape="round" size="small" status="success" *ngFor="let item of menus"
+      [routerLink]="item.url">{{item.title}}</button>
   </section>
 </header>

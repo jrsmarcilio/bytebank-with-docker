@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NbActionsModule, NbCardModule, NbIconModule, NbMenuModule } from '@nebular/theme';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbIconModule, NbMenuModule } from '@nebular/theme';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 
@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
     NbIconModule,
     NbMenuModule,
     NbActionsModule,
+    NbButtonModule,
     RouterModule
   ],
   exports: [

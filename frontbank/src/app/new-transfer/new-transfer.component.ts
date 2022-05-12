@@ -39,15 +39,17 @@ export class NewTransferComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       value: [null, [Validators.required, Validators.min(1), Validators.maxLength(8)]],
-      destination: ['', Validators.required],
-      transfer: [0, Validators.required],
+      destination: ['', [Validators.required]],
+      transfer: [null, [Validators.required]],
     });
 
     if (!this.isAddTransfer) {
       this.service
         .getById(this.id)
         .pipe(first())
-        .subscribe((x: any) => this.form.patchValue(x));
+        .subscribe((x: any) => {
+          this.form.patchValue(x);
+        });
     }
   }
 

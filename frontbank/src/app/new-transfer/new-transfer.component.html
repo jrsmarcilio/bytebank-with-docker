@@ -37,8 +37,8 @@
     </nb-card>
 
     <div class="botao-wrapper">
-      <button type="submit" class="botao">Send transfer</button>
-      <a *ngIf="!isAddTransfer" routerLink="/extracts" class="botao">Cancel</a>
+      <button type="submit" nbButton fullWidth status="success">Send transfer</button>
+      <button *ngIf="!isAddTransfer" nbButton fullWidth status="danger">Cancel</button>
     </div>
   </form>
 </section>

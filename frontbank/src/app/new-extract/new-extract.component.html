@@ -8,8 +8,8 @@
           Transfer: {{ transfer.transfer }}
 
           <section>
-            <i class="fa-solid fa-pen-to-square" onclick="changeEdit(transfer)"></i>
-            <i class="fa-solid fa-trash-can" onclick="changeDelete(transfer)"></i>
+            <i class="fa-solid fa-pen-to-square" (click)="changeEdit(transfer.id);"></i>
+            <i class="fa-solid fa-trash-can" onclick="changeDelete()"></i>
           </section>
         </nb-card-header>
 

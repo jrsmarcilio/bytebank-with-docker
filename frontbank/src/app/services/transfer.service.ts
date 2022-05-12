@@ -22,11 +22,11 @@ export class TransferService {
   }
 
   allTransfers(): Observable<IDataTransfer[]> {
-    return this.httpClient.get<IDataTransfer[]>(this.url);
+    return this.httpClient.get<IDataTransfer[]>(this.local);
   }
 
   newTransfer(data: IDataTransfer): Observable<IDataTransfer> {
-    return this.httpClient.post<IDataTransfer>(this.url, data);
+    return this.httpClient.post<IDataTransfer>(this.local, data);
   }
 
   updateTransfer(id: number, data: IDataTransfer): Observable<IDataTransfer> {

@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
+  NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
   NbIconModule,
@@ -53,6 +54,7 @@ registerLocaleData(localePT, 'pt')
     NbInputModule,
     NbLayoutModule,
     NbListModule,
+    NbButtonModule,
     NbMenuModule.forRoot(),
     NbRadioModule,
     ReactiveFormsModule,

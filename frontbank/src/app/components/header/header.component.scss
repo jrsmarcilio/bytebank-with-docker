@@ -17,3 +17,9 @@ section {
     cursor: pointer;
   }
 }
+
+.btn-menu {
+  display: flex;
+  justify-content: space-around;
+  width: 250px;
+}
