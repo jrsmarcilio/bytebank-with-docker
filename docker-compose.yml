@@ -1,0 +1,57 @@
+version: "3.9"
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      dockbank_net:
+        ipv4_address: 172.15.238.30
+
+  backend:
+    build:
+      context: ./backbank
+      dockerfile: ../backbank/Dockerfile
+    env_file: ./.env
+    environment:
+      - DB_HOST=172.15.238.30
+      - DB_USERNAME=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_PASSWORD
+      - DB_DATABASE=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    networks:
+      dockbank_net:
+        ipv4_address: 172.15.238.20
+
+  frontend:
+    build:
+      context: ./bytebank
+      dockerfile: ../bytebank/Dockerfile
+    env_file: ./.env
+    environment:
+      - BACKEND_NODE_HOST=backend
+      - BACKEND_NODE_PORT=$NODE_LOCAL_PORT
+    ports:
+      - $NODE_ANGULAR_PORT:$NGINX_PORT
+    networks:
+      dockbank_net:
+        ipv4_address: 172.15.238.10
+
+volumes:
+  db:
+
+networks:
+  dockbank_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.15.238.0/24"
