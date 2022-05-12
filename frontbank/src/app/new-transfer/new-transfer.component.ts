@@ -11,7 +11,6 @@ import { TransferService } from '../services/transfer.service';
 })
 export class NewTransferComponent implements OnInit {
   isAddTransfer: boolean;
-
   submitted: boolean = false;
   loading: boolean = false;
 
@@ -44,12 +43,7 @@ export class NewTransferComponent implements OnInit {
     });
 
     if (!this.isAddTransfer) {
-      this.service
-        .getById(this.id)
-        .pipe(first())
-        .subscribe((x: any) => {
-          this.form.patchValue(x);
-        });
+      this.service.getById(this.id).pipe(first()).subscribe(x => this.form.patchValue(x));
     }
   }
 
@@ -79,7 +73,7 @@ export class NewTransferComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () =>
-          this.router.navigate(['/extracts'], { relativeTo: this.route }),
+          this.router.navigate(['../'], { relativeTo: this.route }),
         error: (error) => {
           console.error(error);
           this.loading = false;
@@ -93,7 +87,7 @@ export class NewTransferComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () =>
-          this.router.navigate(['/extracts'], { relativeTo: this.route }),
+          this.router.navigate(['../../'], { relativeTo: this.route }),
         error: (error) => {
           console.error(error);
           this.loading = false;

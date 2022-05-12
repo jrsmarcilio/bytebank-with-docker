@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { IDataTransfer } from '../interfaces/transfer.interface';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
+import { IDataTransfer } from '../interfaces/transfer.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class TransferService {
   private listTransfers: IDataTransfer[];
   private url: string = `${environment.backendBaseUrl}:${environment.backendBasePort}/transfer`;
-  private local: string = 'http://localhost:8080/transfer';
+  private local: string = `http://localhost:8080/transfer`;
 
   constructor(private httpClient: HttpClient) {
     this.listTransfers = [];
@@ -30,12 +29,17 @@ export class TransferService {
   }
 
   updateTransfer(id: number, data: IDataTransfer): Observable<IDataTransfer> {
-    const url: string = `${this.url}/${id}`
-    return this.httpClient.post<IDataTransfer>(url, data)
+    const url: string = `${this.local}/${id}`
+    return this.httpClient.put<IDataTransfer>(url, data)
   }
 
   getById(id: number): Observable<IDataTransfer> {
-    const url: string = `${this.url}/edit/${id}`;
+    const url: string = `${this.local}/${id}`;
     return this.httpClient.get<IDataTransfer>(url);
+  }
+
+  deleteById(id: number): Observable<IDataTransfer> {
+    const url: string = `${this.local}/${id}`;
+    return this.httpClient.delete<IDataTransfer>(url);
   }
 }

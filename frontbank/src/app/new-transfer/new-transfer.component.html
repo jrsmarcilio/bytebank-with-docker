@@ -38,7 +38,7 @@
 
     <div class="botao-wrapper">
       <button type="submit" nbButton fullWidth status="success">Send transfer</button>
-      <button *ngIf="!isAddTransfer" nbButton fullWidth status="danger">Cancel</button>
+      <button routerLink="/extracts" *ngIf="!isAddTransfer" nbButton fullWidth status="danger">Cancel</button>
     </div>
   </form>
 </section>
