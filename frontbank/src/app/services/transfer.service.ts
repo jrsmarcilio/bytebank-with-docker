@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class TransferService {
   private listTransfers: IDataTransfer[];
   private url: string = `${environment.backendBaseUrl}:${environment.backendBasePort}/transfer`;
+  private local: string = 'http://localhost:8080/transfer';
 
   constructor(private httpClient: HttpClient) {
     this.listTransfers = [];
@@ -25,8 +26,7 @@ export class TransferService {
   }
 
   newTransfer(data: IDataTransfer): Observable<IDataTransfer> {
-    const transfer: IDataTransfer = data;
-    return this.httpClient.post<IDataTransfer>(this.url, transfer);
+    return this.httpClient.post<IDataTransfer>(this.url, data);
   }
 
   updateTransfer(id: number, data: IDataTransfer): Observable<IDataTransfer> {

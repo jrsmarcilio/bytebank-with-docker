@@ -5,7 +5,7 @@
 
     <section class="form-field">
       <label for="value" class="form-field__label">Value</label>
-      <input formControlName="value" class="form-control" nbInput name="value" type="number" min="0" max="999"
+      <input formControlName="value" class="form-control" nbInput name="value" type="number" min="1"
         placeholder="R$ 999,99" [ngClass]="{ 'is-invalid': submitted && formField.value.errors }">
 
       <div *ngIf="submitted && formField.value.errors">
@@ -23,7 +23,7 @@
     </section>
 
     <nb-card>
-      <nb-card-header>Selected transfer type: {{ transfer }}</nb-card-header>
+      <nb-card-header>Selected transfer type: {{ formField.transfer.value }}</nb-card-header>
       <nb-card-body>
         <nb-radio-group formControlName="transfer" class="form-control" name="transfer">
           <nb-radio *ngFor="let option of options" [value]="option.label" [ngClass]="{ 'is-invalid': submitted && formField.transfer.errors }">

@@ -38,9 +38,9 @@ export class NewTransferComponent implements OnInit {
     this.isAddTransfer = !this.id;
 
     this.form = this.formBuilder.group({
-      value: [0, Validators.required, Validators.min(1)],
+      value: [null, [Validators.required, Validators.min(1), Validators.maxLength(8)]],
       destination: ['', Validators.required],
-      transfer: ['', Validators.required],
+      transfer: [0, Validators.required],
     });
 
     if (!this.isAddTransfer) {
@@ -58,7 +58,10 @@ export class NewTransferComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      console.error(this.form.value);
+      return;
+    }
 
     this.loading = true;
     if (this.isAddTransfer) {

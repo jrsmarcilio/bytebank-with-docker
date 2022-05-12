@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'extracts', pathMatch: 'full' },
   { path: 'extracts', component: NewExtractComponent },
   { path: 'transfer', component: NewTransferComponent },
-  { path: '/edit/:id', component: NewTransferComponent },
+  { path: 'edit/:id', component: NewTransferComponent },
 ];
 
 @NgModule({

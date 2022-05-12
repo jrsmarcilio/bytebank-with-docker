@@ -2,7 +2,7 @@
   <nb-card-header>My transfers</nb-card-header>
   <nb-list>
     <nb-list-item *ngFor="let transfer of dataTransfer">
-      <nb-card [accent]="transfer.transfer == 'PIX' ? 'success' : transfer.transfer == 'DOC' ? 'basic' : 'info'"
+      <nb-card [accent]="transfer.transfer == 'PIX' ? 'success' : transfer.transfer == 'DOC' ? 'warning' : 'info'"
         style="padding: 0; width: 100%;">
         <nb-card-header>
           Transfer: {{ transfer.transfer }}
