@@ -34,8 +34,8 @@ services:
 
   frontend:
     build:
-      context: ./bytebank
-      dockerfile: ../bytebank/Dockerfile
+      context: ./frontbank
+      dockerfile: ../frontbank/Dockerfile
     env_file: ./.env
     environment:
       - BACKEND_NODE_HOST=backend
