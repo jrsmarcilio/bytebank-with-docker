@@ -1,0 +1,32 @@
+<nb-card size="medium" *ngIf="dataTransfer.length > 0; else noTransfer">
+  <nb-card-header>My transfers</nb-card-header>
+  <nb-list>
+    <nb-list-item *ngFor="let transfer of dataTransfer">
+      <nb-card [accent]="transfer.transfer == 'PIX' ? 'success' : transfer.transfer == 'DOC' ? 'basic' : 'info'"
+        style="padding: 0; width: 100%;">
+        <nb-card-header>
+          Transfer: {{ transfer.transfer }}
+
+          <section>
+            <i class="fa-solid fa-pen-to-square" onclick="changeEdit(transfer)"></i>
+            <i class="fa-solid fa-trash-can" onclick="changeDelete(transfer)"></i>
+          </section>
+        </nb-card-header>
+
+        <nb-card-body>
+          <label class="text-basic">{{transfer.destination | titlecase }}</label>
+          <label class="text-control">{{ transfer.value | currency }}</label>
+        </nb-card-body>
+        <nb-card-footer>
+          <span class="text-disabled">{{transfer.updated_at | date: "short"}}</span>
+        </nb-card-footer>
+      </nb-card>
+    </nb-list-item>
+  </nb-list>
+</nb-card>
+
+<ng-template #noTransfer>
+  <nb-card accent="danger" style="padding: 0; width: 100%;">
+    <nb-card-header>No transfer</nb-card-header>
+  </nb-card>
+</ng-template>

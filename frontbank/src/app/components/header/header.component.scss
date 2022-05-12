@@ -1,0 +1,19 @@
+header {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+}
+
+section {
+  a {
+    padding: 0.5rem 2rem;
+    background-color: var(--card-header-danger-background-color);
+    border-radius: 6px;
+    margin: 0 0.5rem;
+    color: #ffffff;
+  }
+
+  a:hover {
+    cursor: pointer;
+  }
+}

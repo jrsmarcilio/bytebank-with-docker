@@ -1,0 +1,44 @@
+<section class="container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="formulario">
+    <h2 *ngIf="isAddTransfer" class="formulario__titulo">New transfer</h2>
+    <h2 *ngIf="!isAddTransfer" class="formulario__titulo">Edit transfer</h2>
+
+    <section class="form-field">
+      <label for="value" class="form-field__label">Value</label>
+      <input formControlName="value" class="form-control" nbInput name="value" type="number" min="0" max="999"
+        placeholder="R$ 999,99" [ngClass]="{ 'is-invalid': submitted && formField.value.errors }">
+
+      <div *ngIf="submitted && formField.value.errors">
+        <label *ngIf="formField.value.errors.required" class="text-hint">Value is required</label>
+      </div>
+    </section>
+
+    <section class="form-field">
+      <label for="destination" class="form-field__label">Destination</label>
+      <input formControlName="destination" class="form-control" nbInput name="destination" type="text" placeholder="destination transfer" [ngClass]="{ 'is-invalid': submitted && formField.destination.errors }">
+
+      <div *ngIf="submitted && formField.destination.errors">
+        <label *ngIf="formField.destination.errors.required" class="text-hint">Destination is required</label>
+      </div>
+    </section>
+
+    <nb-card>
+      <nb-card-header>Selected transfer type: {{ transfer }}</nb-card-header>
+      <nb-card-body>
+        <nb-radio-group formControlName="transfer" class="form-control" name="transfer">
+          <nb-radio *ngFor="let option of options" [value]="option.label" [ngClass]="{ 'is-invalid': submitted && formField.transfer.errors }">
+            {{ option.label }}
+          </nb-radio>
+        </nb-radio-group>
+      </nb-card-body>
+      <nb-card-footer *ngIf="submitted && formField.transfer.errors">
+        <label *ngIf="formField.transfer.errors.required" class="text-hint">Transfer is required</label>
+      </nb-card-footer>
+    </nb-card>
+
+    <div class="botao-wrapper">
+      <button type="submit" class="botao">Send transfer</button>
+      <a *ngIf="!isAddTransfer" routerLink="/extracts" class="botao">Cancel</a>
+    </div>
+  </form>
+</section>
