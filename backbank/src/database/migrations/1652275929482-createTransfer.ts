@@ -16,8 +16,9 @@ export class createTransfer1652275929482 implements MigrationInterface {
           },
           {
             name: "value",
-            type: "double",
+            type: "decimal",
             precision: 8,
+            scale: 2,
             isNullable: false,
           },
           {

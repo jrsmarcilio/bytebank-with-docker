@@ -11,7 +11,7 @@ class Transfer {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ type: "decimal", nullable: false, precision: 8, scale: 2 })
+  @Column('decimal', { precision: 8, scale: 2, nullable: false })
   value: number;
 
   @Column({ nullable: false })
