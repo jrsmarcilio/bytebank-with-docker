@@ -7,13 +7,17 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
+      - LANG=C.UTF-8
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db:/var/lib/mysql
+    command: 'mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci'
+    hostname: mysqldb
     networks:
       dockbank_net:
-        ipv4_address: $MYSQLDB_HOST
+        aliases:
+          - mysqldb
 
   backend:
     build:
@@ -21,16 +25,17 @@ services:
       dockerfile: ../backbank/Dockerfile
     env_file: ./.env
     environment:
-      - DB_HOST=$MYSQLDB_HOST
+      - DB_HOST=mysqldb
       - DB_USERNAME=$MYSQLDB_USER
       - DB_PASSWORD=$MYSQLDB_PASSWORD
       - DB_DATABASE=$MYSQLDB_DATABASE
       - DB_PORT=$MYSQLDB_DOCKER_PORT
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    depends_on:
+      - mysqldb
     networks:
-      dockbank_net:
-        ipv4_address: $NODE_HOST
+      - dockbank_net
 
   frontend:
     build:
@@ -43,15 +48,15 @@ services:
     ports:
       - $NODE_ANGULAR_PORT:$NGINX_PORT
     networks:
-      dockbank_net:
-        ipv4_address: $NODE_ANGULAR_HOST
+      - frontbank_net
+      - dockbank_net
 
 volumes:
   db:
 
 networks:
   dockbank_net:
-    ipam:
-      driver: default
-      config:
-        - subnet: $NETWORK_SUBNET
+    external: true
+  
+  frontbank_net:
+    driver: bridge

@@ -9,8 +9,7 @@ import { IDataTransfer } from '../interfaces/transfer.interface';
 })
 export class TransferService {
   private listTransfers: IDataTransfer[];
-  private url: string = `${environment.backendBaseUrl}:${environment.backendBasePort}/transfer`;
-  private local: string = `http://localhost:8080/transfer`;
+  private url: string = `http://${environment.backendBaseUrl}:${environment.backendBasePort}/transfer`;
 
   constructor(private httpClient: HttpClient) {
     this.listTransfers = [];
@@ -21,25 +20,25 @@ export class TransferService {
   }
 
   allTransfers(): Observable<IDataTransfer[]> {
-    return this.httpClient.get<IDataTransfer[]>(this.local);
+    return this.httpClient.get<IDataTransfer[]>(this.url);
   }
 
   newTransfer(data: IDataTransfer): Observable<IDataTransfer> {
-    return this.httpClient.post<IDataTransfer>(this.local, data);
+    return this.httpClient.post<IDataTransfer>(this.url, data);
   }
 
   updateTransfer(id: number, data: IDataTransfer): Observable<IDataTransfer> {
-    const url: string = `${this.local}/${id}`
+    const url: string = `${this.url}/${id}`
     return this.httpClient.put<IDataTransfer>(url, data)
   }
 
   getById(id: number): Observable<IDataTransfer> {
-    const url: string = `${this.local}/${id}`;
+    const url: string = `${this.url}/${id}`;
     return this.httpClient.get<IDataTransfer>(url);
   }
 
   deleteById(id: number): Observable<IDataTransfer> {
-    const url: string = `${this.local}/${id}`;
+    const url: string = `${this.url}/${id}`;
     return this.httpClient.delete<IDataTransfer>(url);
   }
 }
